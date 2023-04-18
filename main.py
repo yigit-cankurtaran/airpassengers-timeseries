@@ -35,3 +35,8 @@ plt.plot(test, label='Test')
 plt.plot(predictions, label='Predictions')
 plt.legend()
 plt.show()
+
+#  Plot residuals
+residuals = pd.DataFrame(model_fit.resid)
+residuals.plot()
+plt.show()
