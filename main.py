@@ -3,7 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
-from statsmodels.tsa.arima.model import ARIMA
+from statsmodels.tsa.statespace.sarimax import SARIMAX
 
 #  import the flights dataset
 flights = sns.load_dataset('flights')
@@ -18,8 +18,7 @@ flights = flights['passengers']
 train, test = train_test_split(flights, test_size=0.2, shuffle=False)
 
 #  fit the model
-model = ARIMA(train, order=(1, 1, 1))
-model_fit = model.fit()
+model_fit = SARIMAX(train, order=(1, 1, 1), seasonal_order=(1, 1, 1, 12)).fit()
 
 #  make predictions
 predictions = model_fit.predict(
